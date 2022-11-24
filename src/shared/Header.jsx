@@ -39,9 +39,9 @@ const Header = () => {
                                         </div>
                                     </div>
                                     <ul tabIndex={0} className="dropdown-content menu mt-2  p-2 shadow bg-stone-300 rounded-box w-52">
-                                        <li><NavLink to="/my-profile" className={({ isActive }) => isActive ? "bg-[#3A4256] text-white" : undefined}>{user?.displayName}</NavLink></li>
+                                        <li><NavLink to="/my-profile" className={({ isActive }) => isActive ? "bg-[#3A4256] text-white rounded-md" : undefined}>{user?.displayName}</NavLink></li>
 
-                                        <li> <Link onClick={handleLogout} className="w-full" >Sign Out</Link></li>
+                                        <li> <Link onClick={handleLogout} className="w-full rounded-md" >Sign Out</Link></li>
                                     </ul>
                                 </div>
                             </>
@@ -52,7 +52,7 @@ const Header = () => {
                     }
                 </>
                 :
-                <li><NavLink to="/login" className={({ isActive }) => isActive ? "bg-[#3A4256] text-white" : undefined}>Login</NavLink></li>
+                <li><NavLink to="/login" className={({ isActive }) => isActive ? "bg-[#3A4256] text-white rounded-md" : undefined}>Login</NavLink></li>
         }
     </>
     return (
