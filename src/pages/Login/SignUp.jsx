@@ -1,29 +1,47 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../Context/UserContext';
+import useToken from '../../hooks/useToken';
 import imageUpload from '../../js/imageUpload';
 import Loading from '../../shared/Loading';
 import SocialLogin from './SocialLogin';
 
 const SignUp = () => {
-    const { createUser, updateNameImage, verifyEmail } = useContext(AuthContext);
+    const { user, createUser, updateNameImage, verifyEmail } = useContext(AuthContext);
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
     const [loadingUser, setLoadingUser] = useState(false);
+    const [status, setStatus] = useState("Buyers");
+
+    const [token] = useToken(user);
 
     const navigate = useNavigate();
     const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+
+    }, [token, from, navigate]);
 
     if (loadingUser) {
         return <Loading></Loading>
     }
 
-    const from = location.state?.from?.pathname || '/';
+
+   
+
+    function changeStatus(e) {
+        setStatus(e.target.value);
+      }
 
     const onSubmit = data => {
         const { name, email, password } = data;
+       
         const image = data.image[0];
         setLoadingUser(true)
         // 1.Create User 
@@ -44,7 +62,6 @@ const SignUp = () => {
                                         .then(() => {
                                             toast.success('Please check your email for verification link', { autoClose: 1000 })
                                             setLoadingUser(false);
-                                            navigate(from, { replace: true })
                                         })
                                         .catch(error => {
                                             setLoadingUser(false);
@@ -129,7 +146,7 @@ const SignUp = () => {
                             <input
                                 type="password"
                                 autoComplete='username'
-                                className="input input-bordered mb-1"
+                                className="input input-bordered mb-3"
                                 placeholder='Password'
                                 {...register("password", {
                                     required: "Password is required",
@@ -144,6 +161,10 @@ const SignUp = () => {
                             {errors.password?.type === 'required' && <p role="alert">{errors.password?.message}</p>}
                             {errors.password?.type === 'minLength' && <p role="alert">{errors.password?.message}</p>}
 
+                            <select value={status} onChange={changeStatus} className="select select-bordered w-full ">
+                                <option value="single">Buyers</option>
+                                <option value="married">Seller </option>
+                            </select>
 
                             <input type="submit" className='btn mt-6' value="Sign Up" />
                         </form>
