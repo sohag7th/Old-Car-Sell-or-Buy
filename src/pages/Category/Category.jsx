@@ -15,8 +15,8 @@ const Category = () => {
     }
 
 
-    console.log(name);
-    console.log(products);
+    // console.log(name);
+    // console.log(products);
     return (
         <div className=''>
             <h2 className='text-center text-4xl pt-2'>Which one you want? </h2>

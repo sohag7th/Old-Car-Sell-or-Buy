@@ -30,7 +30,7 @@ const ProductCad = ({ product, setOpenModal }) => {
                             onClick={() => setOpenModal(product)}
                             htmlFor="modalBooking"
                             className="btn btn-sm modal-button bg-gradient-to-r from-secondary to-primary border-0 text-white">
-                            Book Appointment
+                            Book Now
                         </label>
                     {/* <button className="btn btn-sm">Book Now</button> */}
                 </div>
