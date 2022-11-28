@@ -6,42 +6,43 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../Context/UserContext';
 import useToken from '../../hooks/useToken';
 import imageUpload from '../../js/imageUpload';
+import storeUserInformation from '../../js/storeUserInformation';
 import Loading from '../../shared/Loading';
 import SocialLogin from './SocialLogin';
 
 const SignUp = () => {
-    const { user, createUser, updateNameImage, verifyEmail } = useContext(AuthContext);
+    const { user, createUser, updateNameImage  } = useContext(AuthContext);
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
     const [loadingUser, setLoadingUser] = useState(false);
-    const [status, setStatus] = useState("Buyers");
+    const [userInfo, setUserInfo] = useState({});
 
+    // const [token] = useToken({ user, ...userInfo });
     const [token] = useToken(user);
 
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
+    
+
     useEffect(() => {
         if (token) {
+            storeUserInformation(userInfo);
             navigate(from, { replace: true });
         }
 
-    }, [token, from, navigate]);
+    }, [token, from, navigate, userInfo]);
+
 
     if (loadingUser) {
         return <Loading></Loading>
     }
 
 
-   
-
-    function changeStatus(e) {
-        setStatus(e.target.value);
-      }
-
     const onSubmit = data => {
-        const { name, email, password } = data;
-       
+        const { name, email, password, status } = data;
+        setUserInfo({ name: name, email: email, status: status })
+
         const image = data.image[0];
         setLoadingUser(true)
         // 1.Create User 
@@ -56,17 +57,18 @@ const SignUp = () => {
                             //3. Update Name
                             updateNameImage(name, img)
                                 .then(() => {
-                                    toast.success('Name And Img Updated', { autoClose: 1000 })
-                                    //4. Email verification
-                                    verifyEmail()
-                                        .then(() => {
-                                            toast.success('Please check your email for verification link', { autoClose: 1000 })
-                                            setLoadingUser(false);
-                                        })
-                                        .catch(error => {
-                                            setLoadingUser(false);
-                                            toast.error(error.message)
-                                        })
+                                    toast.success('Name And Img Updated', { autoClose: 1000 });
+                                    setLoadingUser(false);
+                                    // //4. Email verification
+                                    // verifyEmail()
+                                    //     .then(() => {
+                                    //         toast.success('Please check your email for verification link', { autoClose: 1000 })
+                                    //         setLoadingUser(false);
+                                    //     })
+                                    //     .catch(error => {
+                                    //         setLoadingUser(false);
+                                    //         toast.error(error.message)
+                                    //     })
                                 })
                                 .catch(error => {
                                     toast.error(error.message)
@@ -161,10 +163,18 @@ const SignUp = () => {
                             {errors.password?.type === 'required' && <p role="alert">{errors.password?.message}</p>}
                             {errors.password?.type === 'minLength' && <p role="alert">{errors.password?.message}</p>}
 
-                            <select value={status} onChange={changeStatus} className="select select-bordered w-full ">
+                            <select
+                                className="select select-bordered w-full "
+                                {...register("status")}
+
+                            >
+                                <option value="Buyers">Buyers</option>
+                                <option value="Seller">Seller</option>
+                            </select>
+                            {/* <select value={status} onChange={changeStatus} className="select select-bordered w-full ">
                                 <option value="single">Buyers</option>
                                 <option value="married">Seller </option>
-                            </select>
+                            </select> */}
 
                             <input type="submit" className='btn mt-6' value="Sign Up" />
                         </form>

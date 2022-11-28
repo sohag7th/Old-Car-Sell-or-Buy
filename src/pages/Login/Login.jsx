@@ -1,19 +1,30 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../Context/UserContext';
+import useToken from '../../hooks/useToken';
 import Loading from '../../shared/Loading';
 import SocialLogin from './SocialLogin';
 
 const Login = () => {
     const [userEmail, setUserEmail] = useState('')
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
-    const { signin, resetPassword, loadingUser} = useContext(AuthContext)
+    const { user, signin, resetPassword, loadingUser } = useContext(AuthContext);
+
+    const [token] = useToken(user);
+
     const navigate = useNavigate()
     const location = useLocation()
 
     const from = location.state?.from?.pathname || '/'
+
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+
+    }, [token, from, navigate]);
 
     if (loadingUser) {
         return <Loading></Loading>
@@ -25,7 +36,7 @@ const Login = () => {
         signin(email, password)
             .then(result => {
                 toast.success('Login Success!', { autoClose: 1000 });
-                navigate(from, { replace: true });
+                // navigate(from, { replace: true });
             })
             .catch(error => toast.error(error.message));
         reset();
@@ -38,7 +49,8 @@ const Login = () => {
             .then(() => {
                 toast.success('Reset link has been sent, please check email', { autoClose: 1000 })
             })
-            .catch(error => toast.error(error.message))
+            .catch(error => toast.error(error.message));
+        reset();
     }
 
     return (

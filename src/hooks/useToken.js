@@ -1,34 +1,22 @@
 
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useToken = user => {
     const [token, setToken] = useState('');
-    // console.log(user?.email);
-    // if(user){
-    //     // setToken("abc");
-    //     console.log("user abc");
-    // }
 
-    useEffect(()=>{
-        const email = user?.email;
-        const currentUser = {email: email};
-        if(email){
-            fetch(`http://localhost:5000/user/${email}`,{
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify(currentUser)
-            })
-            .then(res => res.json())
-            .then(data => {
-                const accessToken = data.token;
-                localStorage.setItem('accessToken', accessToken)
-                setToken(accessToken)
-                console.log('Data iinside useToken', data);
-            })
+    useEffect(() => {
+        const userEmail = user?.email;
+        if (userEmail) {
+            fetch(`http://localhost:5000/user/token/${userEmail}`)
+                .then(res => res.json())
+                .then(data => {
+                    const accessToken = data.token;
+                    localStorage.setItem('accessToken', accessToken)
+                    setToken(accessToken)
+                    console.log('Data iinside useToken', data);
+                })
         }
-    },[user]);
+    }, [ user?.email]);
 
     return [token];
 };

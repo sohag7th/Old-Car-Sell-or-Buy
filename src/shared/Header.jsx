@@ -18,7 +18,9 @@ const Header = () => {
     const handleLogout = () => {
         logout()
             .then(toast.warning('User logged out!', { autoClose: 1000 }))
-            .catch(error => console.log(error))
+            .catch(error => console.log(error));
+            
+        localStorage.removeItem('accessToken');
     }
 
     const menuItems = <>
@@ -74,7 +76,7 @@ const Header = () => {
                             darkModeOn ?
                                 <li onClick={() => setDrkModeOn(!darkModeOn)}><button className="btn ml-4 text-white"><FaRegSun /></button></li>
                                 :
-                                <li onClick={() => setDrkModeOn(!darkModeOn)}><button className="btn btn-outline btn-ghost ml-4"><FaMoon/></button></li>
+                                <li onClick={() => setDrkModeOn(!darkModeOn)}><button className="btn btn-outline btn-ghost ml-4"><FaMoon /></button></li>
                         }
                     </ul>
                 </div>
