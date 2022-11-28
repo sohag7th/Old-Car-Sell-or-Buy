@@ -1,6 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Category from "../pages/Category/Category";
+import AllBuyers from "../pages/DashBoard/Admin/AllBuyers";
+import AllSellers from "../pages/DashBoard/Admin/AllSellers";
+import ReportedItems from "../pages/DashBoard/Admin/ReportedItems";
+import MyOrders from "../pages/DashBoard/Buyers/MyOrders";
+import DashBoard from "../pages/DashBoard/DashBoard";
+import MyProfile from "../pages/DashBoard/MyProfile/MyProfile";
+import AddAproduct from "../pages/DashBoard/Sellers/AddAproduct";
+import MyBuyers from "../pages/DashBoard/Sellers/MyBuyers";
+import MyProducts from "../pages/DashBoard/Sellers/MyProducts";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/Login/SignUp";
@@ -29,6 +38,51 @@ const router = createBrowserRouter([
                     <ProtectRoute>
                         <Category />
                     </ProtectRoute>
+            },
+            {
+                path: "/dashboard",
+                element:
+                    <ProtectRoute>
+                        <DashBoard />
+                    </ProtectRoute>,
+                children: [
+                    {
+                        path: '',
+                        element: <MyProfile/>
+                    },
+                    {
+                        path: "my-profile",
+                        element: <MyProfile />
+                    },
+                    {
+                        path: "my-orders",
+                        element: <MyOrders />
+                    },
+                    {
+                        path: "add-a-product",
+                        element: <AddAproduct />
+                    },
+                    {
+                        path: "my-products",
+                        element: <MyProducts />
+                    },
+                    {
+                        path: "my-buyers",
+                        element: <MyBuyers />
+                    },
+                    {
+                        path: "all-sellers",
+                        element: <AllSellers />
+                    },
+                    {
+                        path: "all-buyers",
+                        element: <AllBuyers />
+                    },
+                    {
+                        path: "reported-items",
+                        element: <ReportedItems />
+                    }
+                ]
             },
             {
                 path: "login",

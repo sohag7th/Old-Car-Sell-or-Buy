@@ -19,7 +19,7 @@ const Header = () => {
         logout()
             .then(toast.warning('User logged out!', { autoClose: 1000 }))
             .catch(error => console.log(error));
-            
+
         localStorage.removeItem('accessToken');
     }
 
@@ -31,6 +31,7 @@ const Header = () => {
         {
             user ?
                 <>
+                    <li><NavLink to="/dashboard" className={({ isActive }) => isActive ? "bg-[#3A4256] text-white rounded-md" : undefined}>Dashboard</NavLink></li>
                     {
                         user.photoURL ?
                             <>

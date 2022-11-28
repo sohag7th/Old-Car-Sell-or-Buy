@@ -5,7 +5,7 @@ const storeUserInformation = info => {
     console.log(info)
     
    
-        fetch(`http://localhost:5000/user/${info.email}`, {
+        fetch(`http://localhost:5000/user/info/${info.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
