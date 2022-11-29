@@ -5,7 +5,7 @@ import Loading from '../../../shared/Loading';
 import ProductCad from '../../../shared/ProductCad';
 
 const AllProducts = () => {
-    const { data: products, isLoading, refetch } = useQuery('users', () => fetch(`http://localhost:5000/category`).then(res => res.json()),);
+    const { data: products, isLoading, refetch } = useQuery('users', () => fetch(`https://old-car-server.vercel.app/category`).then(res => res.json()),);
 
 
     if (isLoading) {
@@ -13,7 +13,7 @@ const AllProducts = () => {
     }
 
     const handleDelete = product => {
-        fetch(`http://localhost:5000/category/${product._id}`, {
+        fetch(`https://old-car-server.vercel.app/category/${product._id}`, {
             method: 'DELETE',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -26,7 +26,7 @@ const AllProducts = () => {
                     toast.info(`Product Delete.`, { autoClose: 1000 })
                     
                 }
-                fetch(`http://localhost:5000/brand/${product.categotyName}`, {
+                fetch(`https://old-car-server.vercel.app/brand/${product.categotyName}`, {
                         method: 'PATCH',
                         headers: {
                             'content-type': 'application/json',

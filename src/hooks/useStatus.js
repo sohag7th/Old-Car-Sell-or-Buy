@@ -8,7 +8,7 @@ const useStatus = user => {
         const email = user?.email;
         if (email) {
             setStatusLoading(true);
-            fetch(`http://localhost:5000/user/status/${email}`, {
+            fetch(`https://old-car-server.vercel.app/user/status/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',

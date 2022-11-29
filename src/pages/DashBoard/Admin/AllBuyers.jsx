@@ -10,7 +10,7 @@ const AllBuyers = () => {
 
     const [deleteModal, setDeleteModal] = useState(false);
 
-    const { data: buyers, isLoading, refetch } = useQuery('sellers', () => fetch(`http://localhost:5000/buyers`, {
+    const { data: buyers, isLoading, refetch } = useQuery('sellers', () => fetch(`https://old-car-server.vercel.app/buyers`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`

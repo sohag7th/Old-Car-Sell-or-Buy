@@ -12,7 +12,7 @@ const MyProfile = () => {
     const [statusLoading, setStatusLoading] = useState(false);
     const { register, reset, handleSubmit } = useForm();
 
-    const { data: userInfo = {}, isLoading, refetch } = useQuery('user', () => fetch(`http://localhost:5000/user/status/${user.email}`, {
+    const { data: userInfo = {}, isLoading, refetch } = useQuery('user', () => fetch(`https://old-car-server.vercel.app/user/status/${user.email}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -55,7 +55,7 @@ const MyProfile = () => {
     }
 
     const handleUserInfoUpdate = userInfo => {
-        fetch(`http://localhost:5000/user/info/${user.email}`, {
+        fetch(`https://old-car-server.vercel.app/user/info/${user.email}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',

@@ -21,7 +21,7 @@ const PaymentModal = ({ openModal, setOpenModal, refetch, action }) => {
                 ProductId,
             }
             //   console.log("productUpdate", productUpdate);
-            fetch(`http://localhost:5000/payment/${_id}`, {
+            fetch(`https://old-car-server.vercel.app/payment/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',
@@ -38,7 +38,7 @@ const PaymentModal = ({ openModal, setOpenModal, refetch, action }) => {
                         //   console.log(categotyName);
 
                         //  product quantity decrement 
-                        fetch(`http://localhost:5000/brand/${categotyName}`, {
+                        fetch(`https://old-car-server.vercel.app/brand/${categotyName}`, {
                             method: 'PATCH',
                             headers: {
                                 'content-type': 'application/json',

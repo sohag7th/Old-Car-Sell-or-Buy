@@ -33,7 +33,7 @@ const BookingModal = ({ openModal, setOpenModal, refetch }) => {
         }
      //   console.log(orderinfo);
 
-        fetch(`http://localhost:5000/order/add`, {
+        fetch(`https://old-car-server.vercel.app/order/add`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

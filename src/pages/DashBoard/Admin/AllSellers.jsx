@@ -9,7 +9,7 @@ const AllSellers = () => {
 
     const [deleteModal, setDeleteModal] = useState(false);
 
-    const { data: sellers, isLoading, refetch } = useQuery('sellers', () => fetch(`http://localhost:5000/sellers`, {
+    const { data: sellers, isLoading, refetch } = useQuery('sellers', () => fetch(`https://old-car-server.vercel.app/sellers`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -22,7 +22,7 @@ const AllSellers = () => {
 
     const handleVerify = seller => {
      //   console.log(seller);
-        fetch(`http://localhost:5000/user/info/${seller.email}`, {
+        fetch(`https://old-car-server.vercel.app/user/info/${seller.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',

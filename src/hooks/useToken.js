@@ -7,7 +7,7 @@ const useToken = user => {
     useEffect(() => {
         const userEmail = user?.email;
         if (userEmail) {
-            fetch(`http://localhost:5000/user/token/${userEmail}`)
+            fetch(`https://old-car-server.vercel.app/user/token/${userEmail}`)
                 .then(res => res.json())
                 .then(data => {
                     const accessToken = data.token;

@@ -18,7 +18,7 @@ const AdvertisedSection = () => {
     useEffect(() => {
         const fetching = () => {
             setIsLoading(true);
-            axios.get('http://localhost:5000/advertised')
+            axios.get('https://old-car-server.vercel.app/advertised')
                 .then(res => {
                     setProducts(res.data);
                     setIsLoading(false);

@@ -9,7 +9,7 @@ import Loading from '../../../shared/Loading';
 
 const AddAProduct = () => {
     const { user, loadingUser } = useContext(AuthContext);
-    const { data: brands, isLoading } = useQuery('brandinfo', () => fetch(`http://localhost:5000/brand`).then(res => res.json()));
+    const { data: brands, isLoading } = useQuery('brandinfo', () => fetch(`https://old-car-server.vercel.app/brand`).then(res => res.json()));
     const navigate = useNavigate();
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [loadingImg, setLodingImg] = useState(false);
@@ -51,7 +51,7 @@ const AddAProduct = () => {
                         verified: "",
                         payment: ""
                     };
-                    fetch('http://localhost:5000/category/add', {
+                    fetch('https://old-car-server.vercel.app/category/add', {
                         method: "POST",
                         headers: {
                             'content-type': 'application/json',
@@ -67,7 +67,7 @@ const AddAProduct = () => {
                                 toast.success("Product added successfully");
                              //   console.log(categotyName);
 
-                                fetch(`http://localhost:5000/brand/${categotyName}`, {
+                                fetch(`https://old-car-server.vercel.app/brand/${categotyName}`, {
                                     method: 'PATCH',
                                     headers: {
                                         'content-type': 'application/json',

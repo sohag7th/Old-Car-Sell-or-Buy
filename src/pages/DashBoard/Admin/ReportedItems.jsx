@@ -5,7 +5,7 @@ import Loading from '../../../shared/Loading';
 import ProductCad from '../../../shared/ProductCad';
 
 const ReportedItems = () => {
-    const { data: products, isLoading, refetch } = useQuery('reported', () => fetch(`http://localhost:5000/category/reported/all`).then(res => res.json()),);
+    const { data: products, isLoading, refetch } = useQuery('reported', () => fetch(`https://old-car-server.vercel.app/category/reported/all`).then(res => res.json()),);
 
 
     if (isLoading) {
@@ -13,7 +13,7 @@ const ReportedItems = () => {
     }
 
     const handleDelete = product => {
-        fetch(`http://localhost:5000/category/${product._id}`, {
+        fetch(`https://old-car-server.vercel.app/category/${product._id}`, {
             method: 'DELETE',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -27,7 +27,7 @@ const ReportedItems = () => {
 
                 }
 
-                fetch(`http://localhost:5000/brand/${product.categotyName}`, {
+                fetch(`https://old-car-server.vercel.app/brand/${product.categotyName}`, {
                     method: 'PATCH',
                     headers: {
                         'content-type': 'application/json',

@@ -4,7 +4,7 @@ import Loading from '../../shared/Loading';
 import BrandCard from './BrandCard';
 
 const BrandName = () => {
-    const { data: brands, isLoading } = useQuery('brandinfo', () => fetch(`http://localhost:5000/brand`).then(res => res.json()));
+    const { data: brands, isLoading } = useQuery('brandinfo', () => fetch(`https://old-car-server.vercel.app/brand`).then(res => res.json()));
     if (isLoading) {
         return <Loading></Loading>
     }

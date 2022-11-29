@@ -13,7 +13,7 @@ const OrderDeleteModal = ({ deleteModal, setDeleteModal, url, refetch, action })
 
         
 
-        fetch(`http://localhost:5000/${url}/${_id}`, {
+        fetch(`https://old-car-server.vercel.app/${url}/${_id}`, {
             method: 'DELETE',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`

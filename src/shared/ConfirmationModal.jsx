@@ -25,7 +25,7 @@ const ConfirmationModal = ({ openModal, setOpenModal, refetch, action }) => {
 
         }
 
-        const url = `http://localhost:5000/category/${_id}`;
+        const url = `https://old-car-server.vercel.app/category/${_id}`;
 
         fetch(url, fetchMethod)
             .then(res => res.json())

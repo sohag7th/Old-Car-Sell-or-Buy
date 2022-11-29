@@ -11,7 +11,7 @@ const MyBuyers = () => {
     const [deleteProduct, setDeleteProduct] = useState(false);
 
 
-    const { data: buyers, isLoading, refetch } = useQuery('buyers', () => fetch(`http://localhost:5000/buyers/${user.email}`, {
+    const { data: buyers, isLoading, refetch } = useQuery('buyers', () => fetch(`https://old-car-server.vercel.app/buyers/${user.email}`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`

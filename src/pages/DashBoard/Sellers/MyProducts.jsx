@@ -10,7 +10,7 @@ const MyProducts = () => {
     const [action, setAction] = useState(false);
 
     const { user, loadingUser } = useContext(AuthContext);
-    const { data: products, isLoading, refetch } = useQuery('productsOwners', () => fetch(`http://localhost:5000/category/seller/${user.email}`).then(res => res.json()),);
+    const { data: products, isLoading, refetch } = useQuery('productsOwners', () => fetch(`https://old-car-server.vercel.app/category/seller/${user.email}`).then(res => res.json()),);
 
     if (isLoading || loadingUser) {
         return <Loading></Loading>

@@ -13,7 +13,7 @@ const Category = () => {
     const [status, statusLoading] = useStatus(user);
     const [openModal, setOpenModal] = useState(false);
     const name = useParams();
-    const { data: products, isLoading, refetch } = useQuery('products', () => fetch(`http://localhost:5000/category/${name.name}`).then(res => res.json()),);
+    const { data: products, isLoading, refetch } = useQuery('products', () => fetch(`https://old-car-server.vercel.app/category/${name.name}`).then(res => res.json()),);
 
 
     if (loadingUser || statusLoading || isLoading) {
@@ -22,7 +22,7 @@ const Category = () => {
 
 
     const handleReport = (id) => {
-        fetch(`http://localhost:5000/category/${id}`, 
+        fetch(`https://old-car-server.vercel.app/category/${id}`, 
         {
             method: 'PATCH',
             headers: {
