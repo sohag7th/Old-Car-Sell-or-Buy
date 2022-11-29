@@ -4,64 +4,100 @@ import { AuthContext } from '../../../Context/UserContext';
 import Loading from '../../../shared/Loading';
 import DataRow from '../Admin/DataRow';
 import MyorderRow from './MyorderRow';
+import PaymentModal from './PaymentModal';
 
 const MyOrders = () => {
     const { user, loadingUser } = useContext(AuthContext);
 
-   
+    const [openModal, setOpenModal] = useState(false);
+
+
     const [deleteProduct, setDeleteProduct] = useState(false);
 
 
-    const { data: myOrders, isLoading , refetch } = useQuery('myOrders', () => fetch(`http://localhost:5000/order/${user.email}`,{
-            method: 'GET',
-            headers: {
-                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-            }
+    const { data: myOrders, isLoading, refetch } = useQuery('myOrders', () => fetch(`http://localhost:5000/order/${user.email}`, {
+        method: 'GET',
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
         }
-    ).then(res => res.json()), );
+    }
+    ).then(res => res.json()),);
 
     if (isLoading || loadingUser) {
         return <Loading></Loading>
     }
+
+    const handlePayment = order => {
+        setOpenModal(order);
+    }
+
     return (
         <div className='ml-20'>
-        <div className="overflow-x-auto">
-            <table className="table w-full">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Product Name</th>
-                        <th>Product Price</th>
-                        <th>Seller Email</th>
+            {
+                myOrders.length === 0 ?
+                    <h2 className='text-center text-4xl pt-20 text-red-600'>No products order yet. </h2>
+                    :
+                    <h2 className='text-center text-4xl pt-2 text-green-600'>Your order history </h2>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        myOrders?.map((order, index) => <MyorderRow
-                            key={order._id}
-                            order={order}
-                            refetch={refetch}
-                            index={index}
-                            setDeleteProduct={setDeleteProduct}
-                        ></MyorderRow>)
-                    }
+            }
+            <div className="overflow-x-auto">
+                {
+                    myOrders.length > 0 &&
+                    <table className="table w-full">
+                        <thead>
+                            <tr className='font-semibold'>
+                                <th>No.</th>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th>Product Price</th>
+                                <th>Seller Email</th>
+                                <th>Payment</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                myOrders?.map((order, index) => <MyorderRow
+                                    key={order._id}
+                                    order={order}
+                                    refetch={refetch}
+                                    index={index}
+                                    setDeleteProduct={setDeleteProduct}
+                                >
+                                    {order.payment ?
+                                        <th className='text-green-600'> Complete</th>
+                                        :
+                                        <th>
+                                            <label
+                                                onClick={() => handlePayment(order)}
+                                                htmlFor="paymentModal"
+                                                className="  modal-button text-green-600">
+                                                Pay Now
+                                            </label>
+                                        </th>
+                                        // <th className='text-green-600'> <button onClick={()=>handlePayment(order)}>Pay Now</button> </th>
+                                    }
+
+                                </MyorderRow>)
+                            }
 
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                }
 
-            {/* {
-                deleteProduct && <DeleteConfirmationModal
-                    deleteProduct={deleteProduct}
-                    setDeleteProduct={setDeleteProduct}
-                    url={url}
+            </div>
+            {/* Modal Show  */}
+            {
+                openModal
+                &&
+                <PaymentModal
+                    openModal={openModal}
+                    setOpenModal={setOpenModal}
                     refetch={refetch}
-                >
-                </DeleteConfirmationModal>
-            } */}
+                ></PaymentModal>
+            }
         </div>
-    </div>
     );
 };
 

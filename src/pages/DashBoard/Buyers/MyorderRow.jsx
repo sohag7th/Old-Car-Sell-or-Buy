@@ -1,14 +1,16 @@
 import React from 'react';
 
-const MyorderRow = ({order, index}) => {
-    console.log(order)
+const MyorderRow = ({order, index, children}) => {
+    // console.log(order)
     return (
         <tr>
 
         <th>{index + 1}</th>
+        <th><img src={order.image}  alt="" className='h-32 w-32'/></th>
         <th>{order.ProductName}</th>
         <th>{order.ProductPrice}</th>
         <th>{order.ProductSellerEmail}</th>
+        {children}
         {/* <td>{email}</td>
         {
             role !== "admin" ?

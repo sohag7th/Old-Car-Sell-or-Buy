@@ -8,7 +8,7 @@ const DashBoard = () => {
 
     const { user, loadingUser } = useContext(AuthContext);
     const [status, statusLoading] = useStatus(user);
-    console.log(status)
+    // console.log(status)
 
     if (loadingUser || statusLoading) {
         return <Loading></Loading>

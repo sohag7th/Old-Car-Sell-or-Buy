@@ -1,17 +1,24 @@
 import React, { useContext, useState } from 'react';
 import { useQuery } from 'react-query';
 import { AuthContext } from '../../../Context/UserContext';
+import ConfirmationModal from '../../../shared/ConfirmationModal';
 import Loading from '../../../shared/Loading';
 import ProductCad from '../../../shared/ProductCad';
 
 const MyProducts = () => {
     const [openModal, setOpenModal] = useState(false);
+    const [action, setAction] = useState(false);
 
     const { user, loadingUser } = useContext(AuthContext);
     const { data: products, isLoading, refetch } = useQuery('productsOwners', () => fetch(`http://localhost:5000/category/seller/${user.email}`).then(res => res.json()),);
 
-    if (isLoading) {
+    if (isLoading || loadingUser) {
         return <Loading></Loading>
+    }
+
+    const handleModal = (product, modalAction) => {
+        setOpenModal(product);
+        setAction(modalAction);
     }
 
 
@@ -37,26 +44,55 @@ const MyProducts = () => {
                         product={product}
                         setOpenModal={setOpenModal}
                     >
-                        <label
-                            onClick={() => setOpenModal(product)}
-                            htmlFor="modalBooking"
-                            className="btn btn-sm modal-button bg-gradient-to-r from-secondary to-primary border-0 text-white">
-                            Delete
-                        </label>
+                        {
+                            product.payment === "done" ?
+                                <p className='text-green-600 text-lg font-semibold'>Status: Already Sold  </p>
+                                :
+                                <div>
+                                    <p className='text-green-600 font-semibold'>Status: Available </p>
+
+                                    <div className='grid grid-cols-2 gap-5 mt-4'>
+                                        {
+                                            product.advertised ?
+                                                <label
+                                                    className="btn btn-sm modal-button  bg-green-600 border-0 text-white">
+                                                    Advertised
+                                                </label>
+                                                :
+                                                <label
+                                                    onClick={() => handleModal(product, "Advertise")}
+                                                    htmlFor="confirmationModal"
+                                                    className="btn btn-sm modal-button  bg-gradient-to-r from-secondary to-primary border-0 text-white">
+                                                    Advertise
+                                                </label>
+
+                                        }
+
+                                        <label
+                                            onClick={() => handleModal(product, "Delete")}
+                                            htmlFor="confirmationModal"
+                                            className="btn btn-sm modal-button bg-red-600 border-0 text-white">
+                                            Delete
+                                        </label>
+                                    </div>
+                                </div>
+                        }
+
                     </ProductCad>)
                 }
             </div>
 
             {/* Modal Show  */}
-            {/* {
+            {
                 openModal
                 &&
-                <BookingModal
+                <ConfirmationModal
                     openModal={openModal}
                     setOpenModal={setOpenModal}
                     refetch={refetch}
-                ></BookingModal>
-            } */}
+                    action={action}
+                ></ConfirmationModal>
+            }
         </div>
     );
 };

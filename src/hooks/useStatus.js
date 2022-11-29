@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 const useStatus = user => {
     const [status, setStatus] = useState(false);
     const [statusLoading, setStatusLoading] = useState(false);
-    console.log(user)
+    // console.log(user)
     useEffect(() => {
         const email = user?.email;
         if (email) {
@@ -15,13 +15,13 @@ const useStatus = user => {
                     // 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
             }).then(res => res.json()).then(data => {
-                console.log(data);
+                // console.log(data);
                 setStatus(data.status)
                 setStatusLoading(false)
 
             }).catch(e => {
                 setStatusLoading(false);
-                console.log(e);
+                // console.log(e);
             })
         }
     }, [user]);

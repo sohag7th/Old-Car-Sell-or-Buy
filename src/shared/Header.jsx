@@ -18,7 +18,7 @@ const Header = () => {
         return <Loading></Loading>
     }
 
-    console.log(status)
+    // console.log(status)
 
     const handleLogout = () => {
         logout()

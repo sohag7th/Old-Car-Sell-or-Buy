@@ -7,7 +7,7 @@ import Loading from './Loading';
 const BookingModal = ({ openModal, setOpenModal, refetch }) => {
     const { user, loadingUser } = useContext(AuthContext);
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
-    const { _id, carName, resalePrice, sellerEmail } = openModal;
+    const { _id, carName,  resalePrice, sellerEmail, image } = openModal;
     // console.log(openModal);
 
     if (loadingUser) {
@@ -27,7 +27,8 @@ const BookingModal = ({ openModal, setOpenModal, refetch }) => {
             ProductPrice: resalePrice,
             ProductSellerEmail: sellerEmail,
             ProductName: carName,
-            Payment: ""
+            image,
+            payment: ""
         }
         console.log(orderinfo);
 
@@ -43,34 +44,12 @@ const BookingModal = ({ openModal, setOpenModal, refetch }) => {
 
                 toast.info('Congratulation! Your Car is Booked.', { autoClose: 1000 })
 
+                
+
                 refetch();
                 console.log(data);
             })
-
-
-
-        // const productUpdate = {
-        //     categotyName,
-        // }
-        // console.log("productUpdate", productUpdate);
-        // fetch(`http://localhost:5000/category/${_id}`, {
-        //     method: 'PATCH',
-        //     headers: {
-        //         'content-type': 'application/json',
-        //         //    'authorization': `Bearer ${localStorage.getItem('life-advice')}`
-        //     },
-        //     body: JSON.stringify(productUpdate)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         if (data?.modifiedCount > 0) {
-        //             toast.info('ongratulation! Your Car is Booked.', { autoClose: 1000 })
-        //         }
-        //         refetch();
-        //         console.log(data);
-        //     })
-        // toast.success('Congratulation! Your Car is Booked.', { autoClose: 1000 })
+       
 
     }
 
