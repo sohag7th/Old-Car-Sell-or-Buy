@@ -1,6 +1,11 @@
 # Old Car
 
 
+adminEmail: abc@abc.com
+
+adminPassword: 111111
+
+
 
 * live site: [click here](https://old-car-sell-or-buy.web.app)
 * server link: [click here](https://old-car-server.vercel.app/ )
