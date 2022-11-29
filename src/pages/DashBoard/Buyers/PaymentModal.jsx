@@ -35,6 +35,7 @@ const PaymentModal = ({ openModal, setOpenModal, refetch, action }) => {
                     if (data?.modifiedCount > 0) {
                         toast.info('Congratulation! Your Car is Booked.', { autoClose: 1000 })
 
+                        console.log(categotyName);
 
                         fetch(`http://localhost:5000/brand/${categotyName}`, {
                             method: 'PATCH',

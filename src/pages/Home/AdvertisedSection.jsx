@@ -51,7 +51,7 @@ const AdvertisedSection = () => {
                         product={product}
                     >
                         {
-                            status === "Buyers" &&
+                            // status === "Buyers" &&
                             <label
                                 onClick={() => handleMore(product)}
                                 className="btn btn-sm modal-button bg-gradient-to-r from-secondary to-primary border-0 text-white">

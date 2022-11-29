@@ -16,7 +16,7 @@ const SocialLogin = ({ from , socialLoginClick, setSocialLoginClick}) => {
     useEffect(() => {
         if (token) {
             if(socialLoginClick){
-                storeUserInformation({name: user?.displayName, email:user?.email, status: "Buyers"});
+                storeUserInformation({name: user?.displayName, email:user?.email, status: "Buyers", image: user?.photoURL});
             }
             navigate(from, { replace: true });
         }

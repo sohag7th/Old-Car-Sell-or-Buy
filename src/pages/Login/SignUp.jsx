@@ -41,7 +41,7 @@ const SignUp = () => {
 
     const onSubmit = data => {
         const { name, email, password, status } = data;
-        setUserInfo({ name: name, email: email, status: status })
+        
 
         const image = data.image[0];
         setLoadingUser(true)
@@ -54,6 +54,7 @@ const SignUp = () => {
                     .then(result => {
                         if (result.success) {
                             const img = result.data.url
+                            setUserInfo({ name: name, email: email, status: status, image: img })
                             //3. Update Name
                             updateNameImage(name, img)
                                 .then(() => {

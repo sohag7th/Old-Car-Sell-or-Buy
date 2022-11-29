@@ -1,12 +1,12 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 
-const DataRow  = ({ seller, refetch, index, setDeleteProduct }) => {
+const DataRow  = ({ user, refetch, index , children}) => {
 
     
 
 
-    // const { email, role } = seller;
+    // const { email, role } = user;
     const makeAdmin = () => {
         // fetch(`https://vercel-deploy-tools-server.vercel.app/user/admin/${user.email}`, {
         //     method: 'PUT',
@@ -33,9 +33,9 @@ const DataRow  = ({ seller, refetch, index, setDeleteProduct }) => {
         <tr>
 
         <th>{index + 1}</th>
-        <th>{seller.name}</th>
-        <th>{seller.email}</th>
-        <th>{seller.status}</th>
+        <th>{user.name}</th>
+        <th>{user.email}</th>
+        {children}
         {/* <td>{email}</td>
         {
             role !== "admin" ?

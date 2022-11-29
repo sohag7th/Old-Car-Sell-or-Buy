@@ -7,7 +7,7 @@ import Loading from './Loading';
 const BookingModal = ({ openModal, setOpenModal, refetch }) => {
     const { user, loadingUser } = useContext(AuthContext);
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
-    const { _id, carName,  resalePrice, sellerEmail, image } = openModal;
+    const { _id, carName,  resalePrice, sellerEmail, image, categotyName } = openModal;
     // console.log(openModal);
 
     if (loadingUser) {
@@ -28,6 +28,7 @@ const BookingModal = ({ openModal, setOpenModal, refetch }) => {
             ProductSellerEmail: sellerEmail,
             ProductName: carName,
             image,
+            categotyName,
             payment: ""
         }
         console.log(orderinfo);

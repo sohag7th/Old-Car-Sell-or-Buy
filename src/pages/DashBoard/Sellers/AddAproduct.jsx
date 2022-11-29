@@ -65,6 +65,7 @@ const AddAProduct = () => {
                             setLodingImg(false)
                             if (inserted.insertedId) {
                                 toast.success("Product added successfully");
+                                console.log(categotyName);
 
                                 fetch(`http://localhost:5000/brand/${categotyName}`, {
                                     method: 'PATCH',

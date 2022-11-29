@@ -11,6 +11,8 @@ const MyorderRow = ({order, index, children}) => {
         <th>{order.ProductPrice}</th>
         <th>{order.ProductSellerEmail}</th>
         {children}
+        
+        
         {/* <td>{email}</td>
         {
             role !== "admin" ?
