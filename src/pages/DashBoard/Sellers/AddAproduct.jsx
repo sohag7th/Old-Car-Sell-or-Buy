@@ -65,7 +65,7 @@ const AddAProduct = () => {
                             setLodingImg(false)
                             if (inserted.insertedId) {
                                 toast.success("Product added successfully");
-                                console.log(categotyName);
+                             //   console.log(categotyName);
 
                                 fetch(`http://localhost:5000/brand/${categotyName}`, {
                                     method: 'PATCH',
@@ -78,7 +78,7 @@ const AddAProduct = () => {
                                     .then(res => res.json())
                                     .then(data => {
 
-                                        console.log(data);
+                                     //   console.log(data);
                                     })
                                     navigate('/dashboard/my-products')
 
@@ -87,22 +87,22 @@ const AddAProduct = () => {
                             else {
                                 toast.error("Failed to add the Product");
                             }
-                            console.log('Product', inserted);
+                         //   console.log('Product', inserted);
                         })
                         .catch(e => {
                             // Loading End
                             setLodingImg(false);
-                            console.log(e);
+                         //   console.log(e);
                         })
                 }
-                console.log('imgbb: ', result);
+             //   console.log('imgbb: ', result);
             })
             .catch(e => {
                 // Loading End
                 setLodingImg(false);
-                console.log(e);
+             //   console.log(e);
             });
-        console.log("Data:", data);
+     //   console.log("Data:", data);
     };
     return (
         <div className='mb-12 lg:mb-20 mx-8'>

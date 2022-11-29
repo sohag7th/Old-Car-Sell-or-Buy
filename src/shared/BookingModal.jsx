@@ -31,7 +31,7 @@ const BookingModal = ({ openModal, setOpenModal, refetch }) => {
             categotyName,
             payment: ""
         }
-        console.log(orderinfo);
+     //   console.log(orderinfo);
 
         fetch(`http://localhost:5000/order/add`, {
             method: 'POST',
@@ -48,7 +48,7 @@ const BookingModal = ({ openModal, setOpenModal, refetch }) => {
                 
 
                 refetch();
-                console.log(data);
+             //   console.log(data);
             })
        
 

@@ -5,7 +5,7 @@ const OrderDeleteModal = ({ deleteModal, setDeleteModal, url, refetch, action })
 
     const { _id, ProductName, resalePrice, sellerEmail } = deleteModal;
 
-    console.log(deleteModal)
+    // console.log(deleteModal)
 
     const handleAction = event => {
         event.preventDefault();
@@ -15,15 +15,18 @@ const OrderDeleteModal = ({ deleteModal, setDeleteModal, url, refetch, action })
 
         fetch(`http://localhost:5000/${url}/${_id}`, {
             method: 'DELETE',
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+             //   console.log(data);
                 if (data?.modifiedCount > 0) {
                     toast.info(`Your Car is ${action}.`, { autoClose: 1000 })
                 }
                 refetch();
-                console.log(data);
+             //   console.log(data);
             })
 
 

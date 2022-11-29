@@ -20,7 +20,7 @@ const PaymentModal = ({ openModal, setOpenModal, refetch, action }) => {
             const productUpdate = {
                 ProductId,
             }
-            console.log("productUpdate", productUpdate);
+         //   console.log("productUpdate", productUpdate);
             fetch(`http://localhost:5000/payment/${_id}`, {
                 method: 'PATCH',
                 headers: {
@@ -31,11 +31,11 @@ const PaymentModal = ({ openModal, setOpenModal, refetch, action }) => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                 //   console.log(data);
                     if (data?.modifiedCount > 0) {
                         toast.info('Congratulation! Your Car is Booked.', { autoClose: 1000 })
 
-                        console.log(categotyName);
+                     //   console.log(categotyName);
 
                         fetch(`http://localhost:5000/brand/${categotyName}`, {
                             method: 'PATCH',
@@ -48,11 +48,11 @@ const PaymentModal = ({ openModal, setOpenModal, refetch, action }) => {
                             .then(res => res.json())
                             .then(data => {
 
-                                console.log(data);
+                             //   console.log(data);
                             })
                     }
                     refetch();
-                    console.log(data);
+                 //   console.log(data);
                 })
 
         }

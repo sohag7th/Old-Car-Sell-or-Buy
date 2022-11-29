@@ -21,7 +21,7 @@ const AllSellers = () => {
     }
 
     const handleVerify = seller => {
-        console.log(seller);
+     //   console.log(seller);
         fetch(`http://localhost:5000/user/info/${seller.email}`, {
             method: 'PUT',
             headers: {
@@ -33,7 +33,7 @@ const AllSellers = () => {
             .then(data => {
                 refetch();
 
-                console.log('Data iinside useToken', data);
+             //   console.log('Data iinside useToken', data);
             })
 
     }

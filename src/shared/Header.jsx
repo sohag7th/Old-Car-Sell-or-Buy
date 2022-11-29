@@ -10,7 +10,7 @@ import useStatus from '../hooks/useStatus';
 
 const Header = () => {
     const { user, logout, loadingUser } = useContext(AuthContext);
-    
+
     const [status, statusLoading] = useStatus(user);
     const [darkModeOn, setDrkModeOn] = useContext(DarkContext);
 
@@ -30,9 +30,8 @@ const Header = () => {
 
     const menuItems = <>
         <li><NavLink to="/home" className={({ isActive }) => isActive ? "bg-[#3A4256] text-white rounded-md" : undefined}>Home</NavLink></li>
-        <li><NavLink to="/courses" className={({ isActive }) => isActive ? "bg-[#3A4256] text-white rounded-md" : undefined}>Products</NavLink></li>
+
         <li><NavLink to="/blog" className={({ isActive }) => isActive ? "bg-[#3A4256] text-white rounded-md" : undefined}>Blog</NavLink></li>
-        <li><NavLink to="/faq" className={({ isActive }) => isActive ? "bg-[#3A4256] text-white rounded-md" : undefined}>FAQ</NavLink></li>
         {
             user ?
                 <>

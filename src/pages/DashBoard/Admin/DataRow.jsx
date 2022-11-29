@@ -25,7 +25,7 @@ const DataRow  = ({ user, refetch, index , children}) => {
         //             toast.success('Make admin')
         //             refetch()
         //         }
-        //         console.log(data)
+        //      //   console.log(data)
 
         //     })
     }

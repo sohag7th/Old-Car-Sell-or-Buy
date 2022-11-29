@@ -13,7 +13,7 @@ const useToken = user => {
                     const accessToken = data.token;
                     localStorage.setItem('accessToken', accessToken)
                     setToken(accessToken)
-                    console.log('Data iinside useToken', data);
+                 //   console.log('Data iinside useToken', data);
                 })
         }
     }, [ user?.email]);

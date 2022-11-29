@@ -26,17 +26,16 @@ const ConfirmationModal = ({ openModal, setOpenModal, refetch, action }) => {
         }
 
         const url = `http://localhost:5000/category/${_id}`;
-        // console.log(url);
 
         fetch(url, fetchMethod)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+             //   console.log(data);
                 if (data?.modifiedCount > 0) {
                     toast.info(`Your Car is ${action}.`, { autoClose: 1000 })
                 }
                 refetch();
-                console.log(data);
+             //   console.log(data);
             })
         // toast.success('Congratulation! Your Car is Booked.', { autoClose: 1000 })
 

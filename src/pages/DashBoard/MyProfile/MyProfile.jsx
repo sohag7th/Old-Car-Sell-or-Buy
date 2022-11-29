@@ -21,7 +21,7 @@ const MyProfile = () => {
     }).then(res => res.json()));
 
     const { name, email, status, address, city, state, zip, username, website, image, bio , verified } = userInfo;
-    console.log(userInfo)
+    // console.log(userInfo)
 
     if (loadingUser || isLoading || statusLoading) {
         return <Loading></Loading>
@@ -44,7 +44,7 @@ const MyProfile = () => {
                     const image = result.data.url
                     inputData = { ...inputData, image }
                     handleUserInfoUpdate(inputData)
-                    console.log(result);
+                 //   console.log(result);
                 })
         }
         else {

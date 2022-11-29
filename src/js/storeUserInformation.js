@@ -15,7 +15,7 @@ const storeUserInformation = info => {
             .then(res => res.json())
             .then(data => {
 
-                console.log('Data iinside useToken', data);
+             //   console.log('Data iinside useToken', data);
             })
     
 
