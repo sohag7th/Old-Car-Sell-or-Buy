@@ -33,6 +33,7 @@ const DashBoard = () => {
                         <>
                             <li><NavLink to="all-sellers" className={({ isActive }) => isActive ? "btn bg-[#3A4256] text-white" : "btn btn-outline"}>All Sellers</NavLink></li>
                             <li><NavLink to="all-buyers" className={({ isActive }) => isActive ? "btn bg-[#3A4256] text-white" : "btn btn-outline"}>All Buyers</NavLink></li>
+                            <li><NavLink to="all-products" className={({ isActive }) => isActive ? "btn bg-[#3A4256] text-white" : "btn btn-outline"}>All Products</NavLink></li>
                             <li><NavLink to="reported-items" className={({ isActive }) => isActive ? "btn bg-[#3A4256] text-white" : "btn btn-outline"}>Reported Items</NavLink></li>
                         </>
                     }

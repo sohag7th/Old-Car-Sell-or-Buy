@@ -4,8 +4,8 @@ import { toast } from 'react-toastify';
 import Loading from '../../../shared/Loading';
 import ProductCad from '../../../shared/ProductCad';
 
-const ReportedItems = () => {
-    const { data: products, isLoading, refetch } = useQuery('reported', () => fetch(`http://localhost:5000/category/reported/all`).then(res => res.json()),);
+const AllProducts = () => {
+    const { data: products, isLoading, refetch } = useQuery('users', () => fetch(`http://localhost:5000/category`).then(res => res.json()),);
 
 
     if (isLoading) {
@@ -24,30 +24,30 @@ const ReportedItems = () => {
                 //   console.log(data);
                 if (data?.modifiedCount > 0) {
                     toast.info(`Product Delete.`, { autoClose: 1000 })
-
+                    
                 }
-
                 fetch(`http://localhost:5000/brand/${product.categotyName}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'content-type': 'application/json',
-                        //    'authorization': `Bearer ${localStorage.getItem('life-advice')}`
-                    },
-                    body: JSON.stringify({ action: "decrement" })
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        refetch();
-
-                        //   console.log(data);
+                        method: 'PATCH',
+                        headers: {
+                            'content-type': 'application/json',
+                            //    'authorization': `Bearer ${localStorage.getItem('life-advice')}`
+                        },
+                        body: JSON.stringify({ action: "decrement" })
                     })
+                        .then(res => res.json())
+                        .then(data => {
+                            refetch();
+
+                            //   console.log(data);
+                        })
+
                 //   console.log(data);
             })
 
     }
-    // console.log(products)
+    console.log(products)
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-screen-xl justify-items-center mx-auto  my-10'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-screen-xl justify-items-center mx-auto  my-20'>
             {
                 products.length > 0 &&
                 products.map(product => <ProductCad
@@ -58,7 +58,7 @@ const ReportedItems = () => {
                     <label
                         onClick={() => handleDelete(product)}
                         className="btn btn-sm modal-button bg-gradient-to-r from-secondary to-primary border-0 text-white">
-                        Delete Product
+                        Delete
                     </label>
 
 
@@ -69,4 +69,4 @@ const ReportedItems = () => {
     );
 };
 
-export default ReportedItems;
+export default AllProducts;

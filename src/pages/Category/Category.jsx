@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../Context/UserContext';
 import useStatus from '../../hooks/useStatus';
 import BookingModal from '../../shared/BookingModal';
@@ -12,7 +13,7 @@ const Category = () => {
     const [status, statusLoading] = useStatus(user);
     const [openModal, setOpenModal] = useState(false);
     const name = useParams();
-    const { data: products, isLoading, refetch } = useQuery('users', () => fetch(`http://localhost:5000/category/${name.name}`).then(res => res.json()),);
+    const { data: products, isLoading, refetch } = useQuery('products', () => fetch(`http://localhost:5000/category/${name.name}`).then(res => res.json()),);
 
 
     if (loadingUser || statusLoading || isLoading) {
@@ -20,8 +21,26 @@ const Category = () => {
     }
 
 
-    console.log(status);
-    console.log(user);
+    const handleReport = (id) => {
+        fetch(`http://localhost:5000/category/${id}`, 
+        {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ reported: 'Yes' })
+        })
+            .then(res => res.json())
+            .then(data => {
+             //   console.log(data);
+                if (data?.modifiedCount > 0) {
+                    toast.info(`Report Sucessfully.`, { autoClose: 1000 })
+                }
+                refetch();
+             //   console.log(data);
+            })
+
+    }
     // console.log(products);
     return (
         <div className=''>
@@ -39,15 +58,21 @@ const Category = () => {
                     >
                         {
                             status === "Buyers" &&
-                            <label
-                                onClick={() => setOpenModal(product)}
-                                htmlFor="modalBooking"
-                                className="btn btn-sm modal-button bg-gradient-to-r from-secondary to-primary border-0 text-white">
-                                Book Now
-                            </label>
+                            <div className='flex justify-between'>
+                                <button
+                                    onClick={() => handleReport(product._id)}
+                                    className="btn btn-sm modal-button bg-red-600 border-0 ">
+                                    Report Product
+                                </button>
+
+                                <label
+                                    onClick={() => setOpenModal(product)}
+                                    htmlFor="modalBooking"
+                                    className="btn btn-sm modal-button bg-gradient-to-r from-secondary to-primary border-0 text-white">
+                                    Book Now
+                                </label>
+                            </div>
                         }
-
-
                     </ProductCad>)
                 }
             </div>
