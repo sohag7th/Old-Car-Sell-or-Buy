@@ -6,14 +6,19 @@ import { AuthContext } from '../Context/UserContext';
 import { DarkContext } from '../layout/Main';
 import Loading from './Loading';
 import { FaMoon, FaRegSun } from "react-icons/fa";
+import useStatus from '../hooks/useStatus';
 
 const Header = () => {
     const { user, logout, loadingUser } = useContext(AuthContext);
+    
+    const [status, statusLoading] = useStatus(user);
     const [darkModeOn, setDrkModeOn] = useContext(DarkContext);
 
-    if (loadingUser) {
+    if (loadingUser || statusLoading) {
         return <Loading></Loading>
     }
+
+    console.log(status)
 
     const handleLogout = () => {
         logout()

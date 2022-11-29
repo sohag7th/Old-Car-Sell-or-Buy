@@ -116,7 +116,7 @@ const SignUp = () => {
                                     }
                                 )}
                             />
-                            {errors.image?.type === 'required' && <p role="alert">{errors.image?.message}</p>}
+                            {errors.image?.type === 'required' && <p className='text-red-500' role="alert">{errors.image?.message}</p>}
 
                             <label className="label">
                                 <span className="label-text">Email</span>

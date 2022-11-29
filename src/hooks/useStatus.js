@@ -1,23 +1,27 @@
 import { useEffect, useState } from "react"
 
 const useStatus = user => {
-    const [status, setStatu] = useState(false);
-    const [statusLoading, setStatusLoading] = useState(true);
+    const [status, setStatus] = useState(false);
+    const [statusLoading, setStatusLoading] = useState(false);
+    console.log(user)
     useEffect(() => {
         const email = user?.email;
         if (email) {
+            setStatusLoading(true);
             fetch(`http://localhost:5000/user/status/${email}`, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-            }
-        })
-            .then(res =>  res.json())
-            .then(data => {
-                // console.log(data);
-                setStatu(data.status)
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    // 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            }).then(res => res.json()).then(data => {
+                console.log(data);
+                setStatus(data.status)
                 setStatusLoading(false)
+
+            }).catch(e => {
+                setStatusLoading(false);
+                console.log(e);
             })
         }
     }, [user]);

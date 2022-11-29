@@ -9,8 +9,10 @@ import SocialLogin from './SocialLogin';
 
 const Login = () => {
     const [userEmail, setUserEmail] = useState('')
+    const [socialLoginClick, setSocialLoginClick] = useState(false)
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
     const { user, signin, resetPassword, loadingUser } = useContext(AuthContext);
+
 
     const [token] = useToken(user);
 
@@ -44,7 +46,7 @@ const Login = () => {
 
     //Reset Pass
     const handleReset = () => {
-        console.log("OnClick: ", userEmail);
+        // console.log("OnClick: ", userEmail);
         resetPassword(userEmail)
             .then(() => {
                 toast.success('Reset link has been sent, please check email', { autoClose: 1000 })
@@ -117,7 +119,11 @@ const Login = () => {
                         <p className='text-xs'>New to Old Car? <Link to="/sign-up" className=' text-secondary cursor-pointer'>Create new account</Link></p>
                         <div className="divider mb-0">OR</div>
 
-                        <SocialLogin from={from}></SocialLogin>
+                        <SocialLogin 
+                        from={from}
+                        socialLoginClick={socialLoginClick}
+                         setSocialLoginClick={setSocialLoginClick}
+                        ></SocialLogin>
 
                     </div>
                 </div>

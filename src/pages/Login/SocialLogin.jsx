@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import { FaFacebookF } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -6,31 +6,35 @@ import { AuthContext } from '../../Context/UserContext';
 import useToken from '../../hooks/useToken';
 import storeUserInformation from '../../js/storeUserInformation';
 
-const SocialLogin = ({ from }) => {
+const SocialLogin = ({ from , socialLoginClick, setSocialLoginClick}) => {
     const { user, signInWithGoogle, signInWithGithub, signInWithFacebook } = useContext(AuthContext);
+    // const [socialLoginClick, setSocialLoginClick] = useState(false);
     const navigate = useNavigate();
 
     const [token] = useToken(user);
 
     useEffect(() => {
         if (token) {
-            storeUserInformation({name: user?.displayName, email:user?.email, status: "Buyers"});
+            if(socialLoginClick){
+                storeUserInformation({name: user?.displayName, email:user?.email, status: "Buyers"});
+            }
             navigate(from, { replace: true });
         }
 
-    }, [token, from, navigate, user]);
+    }, [token, from, navigate, user, socialLoginClick]);
 
 
 
     // Google Signin
     const handleGoogleSignin = () => {
+        setSocialLoginClick(true);
         signInWithGoogle().then(result => {
             toast.success('Login Success!', { autoClose: 1000 });
         })
     }
 
     const handleFacebookSignin = () => {
-        console.log("object");
+        setSocialLoginClick(true);
         signInWithFacebook().then(result => {
             toast.success('Login Success!', { autoClose: 1000 });
         })
@@ -38,7 +42,7 @@ const SocialLogin = ({ from }) => {
 
     // Google Signin
     const handleGithubSignin = () => {
-        console.log("object");
+        setSocialLoginClick(true);
         signInWithGithub().then(result => {
             toast.success('Login Success!', { autoClose: 1000 });
         })
