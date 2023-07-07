@@ -8,9 +8,8 @@ adminPassword: 111111
 
 
 * live site: [click here](https://old-car-sell-or-buy.web.app)
-* server link: [click here](https://old-car-server.vercel.app/ )
-* client side private repo: [click here](https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-sohag-9065)
-* server side private repo: [click here](https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-sohag-9065)
+* server link: [click here](https://old-car-server.vercel.app/ ) 
+* server side   repo: [click here]([https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-sohag-9065](https://github.com/sohag-9065/Old-Car-Sell-or-Buy-Server))
 
 
 
